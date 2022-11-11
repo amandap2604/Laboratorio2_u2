@@ -1,0 +1,55 @@
+//Francisco Abdala y Amanda Pérez.
+use std::fs::File;
+use std::io::prelude::*;
+
+//Función que devuelve el texto que será usado para el análisis.
+fn texto() -> String{
+    let texto = "En modo efímero
+Dijo que yo era el primero
+Me mandó una foto y abajo dejó su número
+Y escribió su ubi
+Porque, cuando me vio, su panti quedó húmedo
+Nuestros videos siguen oculto".to_string().to_uppercase();
+
+    return texto;
+}
+
+//Crea un nuevo archivo de texto donde será agregada el texto de la función anterior.
+fn creacion() -> std::io::Result<()>{
+    let texto = texto();
+
+    let mut archivo = File::create("texto.txt")?;
+
+    archivo.write_all(texto.as_bytes())?;
+
+    Ok(())
+}
+
+//Otorga los puntajes según el texto ingreado.
+fn puntajes() -> u32{
+    let texto = texto();
+    let mut help = 0;
+    for c in texto.chars(){
+        let temp = match c{
+         'A'|'E'|'I'|'O'|'U'|'L'|'N'|'R'|'S'|'T'|'Ñ' => {1},
+            'D'|'G' => {2},
+            'B'|'C'|'M'|'P' => {3},
+            'F'|'H'|'V'|'W'|'Y' => {4}
+            'K' => {5}
+            'J'|'X' => {8},
+            'Q'|'Z' => {10},
+            _ => {0}
+        };
+        help += temp;
+    }
+    return help;
+}
+
+fn main() {
+    println!("Trabajo realizado por Francisco Abdala y Amanda Pérez");
+    //ejecuta la creación de un nuevo archivo de texto.
+    let _file = creacion();
+    //Entrega los puntajes obtenidos luego del análisis dentro de la función anterior.
+    let puntajes = puntajes();
+    println!("El puntaje obtenido es: {}", puntajes);
+}
