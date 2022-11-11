@@ -299,7 +299,7 @@ fn open_file_to_read(p: &Path){
 }
 
 fn main(){
-    println!("Trabajo realizado por Francisco Abdala y Amanda Pérez");
+    println!("Trabajo realizado por Francisco Abdala y Amanda Pérez.");
     //Crea el archivo si es que no existe.
     let path = Path::new("inventario.txt");
     //Mostrar todo lo sometido en el inventario.
